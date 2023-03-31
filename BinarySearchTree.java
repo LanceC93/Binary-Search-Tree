@@ -45,4 +45,39 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     }
 
+    /**
+     * deletes a value from the tree
+     * @param key value that needs to be deleted
+     */
+    /*public void delete(T key) {
+
+    }*/
+
+    /**
+     * searches tree for the key value
+     * @param key value that is being searched for in tree
+     * @return true if item is present, false otherwise
+     */
+    public boolean search(T key) {
+            //returns false for empty trees
+            if(root==null) {
+                return false;
+            }
+            NodeType<T> current = root;
+            boolean present = false;
+    
+            //finds where the node is
+            while(current != null) {
+                if(key.compareTo(current.info) < 0) {
+                    current = current.left;
+                } else if(key.compareTo(current.info) > 0) {
+                    current = current.right;
+                } else {
+                    present = true;
+                }
+            }
+
+            return present;
+    }
+
 }
