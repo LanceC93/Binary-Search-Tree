@@ -23,23 +23,11 @@ public class BinaryTreeDriver {
                 //reads file into tree
                 console = new Scanner(input);
                 if(inputType.equals("s")) {
-                    BinarySearchTree<String> b1 = new BinarySearchTree<String>();
-                    while(console.hasNext()) {
-                        b1.insert(console.next());
-                    }
-                    b1.inOrder();
+                    stringTree(console);
                 } else if (inputType.equals("i")) {
-                    BinarySearchTree<Integer> b1 = new BinarySearchTree<Integer>();
-                    while(console.hasNext()) {
-                        b1.insert(Integer.parseInt(console.next()));
-                    }
-                    b1.inOrder();
+                    intTree(console);
                 } else {
-                    BinarySearchTree<Double> b1 = new BinarySearchTree<Double>();
-                    while(console.hasNext()) {
-                        b1.insert(Double.parseDouble(console.next()));
-                    }
-                    b1.inOrder();
+                    doubleTree(console);
                 }
             }     
             catch (FileNotFoundException e) {
@@ -62,4 +50,184 @@ public class BinaryTreeDriver {
         return inputType;
     }
 
+    /**
+     * allows the user to interact with a tree of Strings
+     * @param console reads command line input
+     */
+    public static void stringTree(Scanner console) {
+        BinarySearchTree<String> b1 = new BinarySearchTree<>();
+        while(console.hasNext()) {
+            b1.insert(console.next());
+        }
+        commands();
+        console = new Scanner(System.in);
+        System.out.print("Enter Command: ");
+        String s = console.next();
+        while(!s.equals("q")) {
+            //executes commmand given a corresponding input
+            switch(s) {
+                case "i":
+                    b1.inOrder();
+                    System.out.print("Enter a string to insert: ");
+                    b1.insert(console.next());
+                    b1.inOrder();
+                    break;
+                case "d":
+                    b1.inOrder();
+                    System.out.print("Enter a string to delete: ");
+                    b1.delete(console.next());
+                    b1.inOrder();
+                    break;
+                case "p":
+                    b1.inOrder();
+                    break;
+                case "s":
+                    b1.inOrder();
+                    System.out.print("Enter a string to search: ");
+                    if(b1.search(console.next())) {
+                        System.out.println("Item is present in the tree.");
+                    } else {
+                        System.out.println("Item is not present in the tree.");
+                    }
+                    break;
+                case "sp":
+                    System.out.print("Single Parents: ");
+                    b1.getSingleParent(b1.getRoot());
+                    System.out.println();
+                    break;
+                case "q":
+                    return;
+                default:
+                    System.out.println("Invalid Command.");
+            }
+            System.out.print("Enter Command: ");
+            s = console.next();
+        }
+        console.close();
+    }
+
+    /**
+     * allows the user to interact with a tree of Integers
+     * @param console reads command line input
+     */
+    public static void intTree(Scanner console) {
+        BinarySearchTree<Integer> b1 = new BinarySearchTree<>();
+        while(console.hasNext()) {
+            b1.insert(Integer.parseInt(console.next()));
+        }
+        commands();
+        console = new Scanner(System.in);
+        System.out.print("Enter Command: ");
+        String s = console.next();
+        while(!s.equals("q")) {
+            //executes commmand given a corresponding input
+            switch(s) {
+                case "i":
+                    b1.inOrder();
+                    System.out.print("Enter a number to insert: ");
+                    b1.insert(Integer.parseInt(console.next()));
+                    b1.inOrder();
+                    break;
+                case "d":
+                    b1.inOrder();
+                    System.out.print("Enter a number to delete: ");
+                    b1.delete(Integer.parseInt(console.next()));
+                    b1.inOrder();
+                    break;
+                case "p":
+                    b1.inOrder();
+                    break;
+                case "s":
+                    b1.inOrder();
+                    System.out.print("Enter a number to search: ");
+                    if(b1.search(Integer.parseInt(console.next()))) {
+                        System.out.println("Item is present in the tree.");
+                    } else {
+                        System.out.println("Item is not present in the tree.");
+                    }
+                    break;
+                case "sp":
+                    System.out.print("Single Parents: ");
+                    b1.getSingleParent(b1.getRoot());
+                    System.out.println();
+                    break;
+                case "q":
+                    return;
+                default:
+                    System.out.println("Invalid Command.");
+            }
+            System.out.print("Enter Command: ");
+            s = console.next();
+        }
+        console.close();
+    }
+
+    /**
+     * allows the user to interact with a tree of Doubles
+     * @param console reads command line input
+     */
+    public static void doubleTree(Scanner console) {
+        BinarySearchTree<Double> b1 = new BinarySearchTree<>();
+        while(console.hasNext()) {
+            b1.insert(Double.parseDouble(console.next()));
+        }
+        commands();
+        console = new Scanner(System.in);
+        System.out.print("Enter Command: ");
+        String s = console.next();
+        while(!s.equals("q")) {
+            //executes commmand given a corresponding input
+            switch(s) {
+                case "i":
+                    b1.inOrder();
+                    System.out.print("Enter a number to insert: ");
+                    b1.insert(Double.parseDouble(console.next()));
+                    b1.inOrder();
+                    break;
+                case "d":
+                    b1.inOrder();
+                    System.out.print("Enter a number to delete: ");
+                    b1.delete(Double.parseDouble(console.next()));
+                    b1.inOrder();
+                    break;
+                case "p":
+                    b1.inOrder();
+                    break;
+                case "s":
+                    b1.inOrder();
+                    System.out.print("Enter a number to search: ");
+                    if(b1.search(Double.parseDouble(console.next()))) {
+                        System.out.println("Item is present in the tree.");
+                    } else {
+                        System.out.println("Item is not present in the tree.");
+                    }
+                    break;
+                case "sp":
+                    System.out.print("Single Parents: ");
+                    b1.getSingleParent(b1.getRoot());
+                    System.out.println();
+                    break;
+                case "q":
+                    return;
+                default:
+                    System.out.println("Invalid Command.");
+            }
+            System.out.print("Enter Command: ");
+            s = console.next();
+        }
+        console.close();
+    }
+
+    /**
+     * prints the available commmands
+     */
+    public static void commands() {
+        System.out.println("Commands: ");
+        System.out.println("(i) - insert item");
+        System.out.println("(d) - delete item");
+        System.out.println("(p) - print tree");
+        System.out.println("(s) - search item");
+        System.out.println("(sp) - find single parents");
+        System.out.println("(q) - quit");
+    }
 }

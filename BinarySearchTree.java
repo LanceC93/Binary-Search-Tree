@@ -11,6 +11,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     /**
+     * allows retrieval of the root node
+     * @return root of the tree
+     */
+    public NodeType<T> getRoot() {
+        return root;
+    }
+
+    /**
      * adds a new node to the BST
      * @param key value that needs to be added to tree
      */
@@ -39,7 +47,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         //adds node to tree
         if(key.compareTo(prev.info) < 0) {
             prev.left = new NodeType<T>(key,null,null);
-        } else if(key.compareTo(prev.info) > 0) {
+        } else {
             prev.right = new NodeType<T>(key,null,null);
         }
 
@@ -49,9 +57,60 @@ public class BinarySearchTree<T extends Comparable<T>> {
      * deletes a value from the tree
      * @param key value that needs to be deleted
      */
-    /*public void delete(T key) {
+    public void delete(T key) {
+        //says item not present if tree is empty or item isnt found
+        if(root!=null) {
+            NodeType<T> current = root;
+            NodeType<T> prev = null;
 
-    }*/
+            //finds where the node is
+            while(current != null) {
+                if(key.compareTo(current.info) < 0) {
+                    prev = current;
+                    current = current.left;
+                } else if(key.compareTo(current.info) > 0) {
+                    prev = current;
+                    current = current.right;
+                } else {
+                    if(current.right == null && current.left == null) { //case where node is a leaf
+                        if(current.info.compareTo(prev.info) < 0) {
+                            prev.left = null;
+                        } else {
+                            prev.right = null;
+                        }
+                    } else if(current.right == null) { //cases where there is a single child
+                        if(current.info.compareTo(prev.info) < 0) {
+                            prev.left = current.left;
+                        } else {
+                            prev.right = current.left;
+                        }
+                    } else if(current.left == null) {
+                        if(current.info.compareTo(prev.info) < 0) {
+                            prev.left = current.right;
+                        } else {
+                            prev.right = current.right;
+                        }
+                    } else { //case where node has two children so it finds predecessor
+                        NodeType<T> pred = current.left;
+                        prev = current;
+                        if(pred.right != null) {
+                            while(pred.right != null) {
+                                prev = pred;
+                                pred = pred.right;
+                            }
+                            current.info = pred.info;
+                            prev.right = null;
+                        } else {
+                            current.info = pred.info;
+                            current.left = pred.left;
+                        }
+                    }
+                    return;
+                }
+            }
+        } 
+        System.out.println("Item is not present in the tree.");
+    }
 
     /**
      * searches tree for the key value
@@ -74,6 +133,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
                     current = current.right;
                 } else {
                     present = true;
+                    current = null;
                 }
             }
 
@@ -98,6 +158,22 @@ public class BinarySearchTree<T extends Comparable<T>> {
             inOrder(node.left);
             System.out.print(node.info + " ");
             inOrder(node.right);
+        } else {
+            return;
+        }
+    }
+
+    /**
+     * prints all single parent nodes
+     * @param node current node that is being traversed
+     */
+    public void getSingleParent(NodeType<T> node) {
+        if(node != null) {
+            getSingleParent(node.left);
+            if((node.left == null && node.right != null) || (node.left != null && node.right == null)) {
+                System.out.print(node.info + " ");
+            }
+            getSingleParent(node.right);
         } else {
             return;
         }
