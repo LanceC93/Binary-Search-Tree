@@ -1,5 +1,5 @@
 //Name: Lance Cross 
-//Due Date: 03/30/23
+//Due Date: 04/02/23
 //driver for a binary search tree
 
 import java.io.File;
@@ -20,7 +20,7 @@ public class BinaryTreeDriver {
 
                 //gets input type
                 String inputType = getInput(console);
-                //reads file into tree
+                //reads file into tree given inputType
                 console = new Scanner(input);
                 if(inputType.equals("s")) {
                     stringTree(console);
@@ -37,6 +37,7 @@ public class BinaryTreeDriver {
     }
 
     /**
+     * gets initial inputType input
      * @param console reads from the command line 
      * @return returns string representing the input type
      */

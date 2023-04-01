@@ -1,5 +1,5 @@
 //Name: Lance Cross 
-//Due Date: 03/30/23
+//Due Date: 04/02/23
 //implements generic nodes of a BST
 
 public class NodeType<T extends Comparable<T>> {
