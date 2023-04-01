@@ -90,9 +90,20 @@ public class BinaryTreeDriver {
                         System.out.println("Item is not present in the tree.");
                     }
                     break;
+                case "l":
+                    System.out.println("The number of leaf nodes is " + b1.getNumLeafNodes(b1.getRoot()));
+                    break;
                 case "sp":
                     System.out.print("Single Parents: ");
                     b1.getSingleParent(b1.getRoot());
+                    System.out.println();
+                    break;
+                case "c":
+                    b1.inOrder();
+                    System.out.print("Enter a string: ");
+                    String word = console.next();
+                    System.out.print(word + " cousins: ");
+                    b1.getCousins(word);
                     System.out.println();
                     break;
                 case "q":
@@ -146,9 +157,20 @@ public class BinaryTreeDriver {
                         System.out.println("Item is not present in the tree.");
                     }
                     break;
+                case "l":
+                    System.out.println("The number of leaf nodes is " + b1.getNumLeafNodes(b1.getRoot()));
+                    break;
                 case "sp":
                     System.out.print("Single Parents: ");
                     b1.getSingleParent(b1.getRoot());
+                    System.out.println();
+                    break;
+                case "c":
+                    b1.inOrder();
+                    System.out.print("Enter a number: ");
+                    String num = console.next();
+                    System.out.print(num + " cousins: ");
+                    b1.getCousins(Integer.parseInt(num));
                     System.out.println();
                     break;
                 case "q":
@@ -202,9 +224,20 @@ public class BinaryTreeDriver {
                         System.out.println("Item is not present in the tree.");
                     }
                     break;
+                case "l":
+                    System.out.println("The number of leaf nodes is " + b1.getNumLeafNodes(b1.getRoot()));
+                    break;
                 case "sp":
                     System.out.print("Single Parents: ");
                     b1.getSingleParent(b1.getRoot());
+                    System.out.println();
+                    break;
+                case "c":
+                    b1.inOrder();
+                    System.out.print("Enter a number: ");
+                    String num = console.next();
+                    System.out.print(num + " cousins: ");
+                    b1.getCousins(Double.parseDouble(num));
                     System.out.println();
                     break;
                 case "q":
@@ -227,7 +260,9 @@ public class BinaryTreeDriver {
         System.out.println("(d) - delete item");
         System.out.println("(p) - print tree");
         System.out.println("(s) - search item");
+        System.out.println("(l) - count leaf nodes");
         System.out.println("(sp) - find single parents");
+        System.out.println("(c) - find cousins");
         System.out.println("(q) - quit");
     }
 }

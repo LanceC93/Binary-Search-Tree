@@ -178,4 +178,97 @@ public class BinarySearchTree<T extends Comparable<T>> {
             return;
         }
     }
+
+    /**
+     * counts number of leaf nodes
+     * @param node current node that is being traversed
+     */
+    public int getNumLeafNodes(NodeType<T> node) {
+
+        if(node != null) {
+            if(node.right == null && node.left == null) {
+                return 1;
+            } else {
+                return getNumLeafNodes(node.left) + getNumLeafNodes(node.right);
+            }
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * finds cousins of a given node
+     * @param target the node whos cousins we are looking for
+     */
+    public void getCousins(T target) {
+        if(!search(target)) {
+            System.out.print("\nItem not in tree.");
+        } else {
+            int height = nodeHeight(target,root);
+            onLevel(root, height, target);
+        }
+    }
+
+    /**
+     * finds how many levels down from target is from root
+     * @param target the node that we need the height of
+     * @param current the node that is being traversed
+     * @return the height of the node being traversed
+     */
+    private int nodeHeight(T target, NodeType<T> current) {
+        int height = 0;
+        //finds out how deep the target node is
+        if(target.compareTo(current.info) < 0) {
+            height += nodeHeight(target, current.left);
+            return height + 1;
+        } else if(target.compareTo(current.info) > 0) {
+            height += nodeHeight(target, current.right);
+            return height + 1;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * finds nodes that are the same distance from the root
+     * @param node current node being traversed
+     * @param height levels down from root to current node
+     * @param target the node that was being targeted initially
+     */
+    private void onLevel(NodeType<T> node, int height, T target) {
+        if(node != null && height >= 0 && node != findParent(target)) {
+            onLevel(node.left, height - 1, target);
+            if(height == 0 && node.info.compareTo(target) != 0) {
+                System.out.print(node.info + " ");
+            }
+            onLevel(node.right, height - 1, target);
+        } else {
+            return;
+        }
+    }
+
+    /**
+     * returns parent of node with info = T
+     * @param child the information inside the child node we are looking for
+     * @return the parent of the node with info = T
+     */
+    private NodeType<T> findParent(T child) {
+        NodeType<T> prev = null;
+        NodeType<T> current = root;
+
+        //finds where the node is
+        while(current != null) {
+            if(child.compareTo(current.info) < 0) {
+                prev = current;
+                current = current.left;
+            } else if(child.compareTo(current.info) > 0) {
+                prev = current;
+                current = current.right;
+            } else {
+                current = null;
+            }
+        }
+
+        return prev;
+    }
 }
