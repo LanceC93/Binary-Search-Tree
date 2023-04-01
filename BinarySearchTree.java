@@ -80,4 +80,26 @@ public class BinarySearchTree<T extends Comparable<T>> {
             return present;
     }
 
+    /**
+     * prints the tree out in order
+     */
+    public void inOrder() {
+        System.out.print("In order: ");
+        inOrder(root);
+        System.out.println();
+    }
+
+    /**
+     * goes through the tree printing each node in order
+     * @param node root of the subtree being traversed
+     */
+    private void inOrder(NodeType<T> node) {
+        if(node != null) {
+            inOrder(node.left);
+            System.out.print(node.info + " ");
+            inOrder(node.right);
+        } else {
+            return;
+        }
+    }
 }
